@@ -1,12 +1,12 @@
 import React from 'react';
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Hello Smart City</Text>
       <Text style={styles.subtitle}>Android Emulator is working ✅</Text>
-    </SafeAreaView>
+    </View>
   );
 }
 
