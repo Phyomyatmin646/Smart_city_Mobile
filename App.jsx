@@ -1,30 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StatusBar } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import AppNavigator from './src/navigation/AppNavigator';
+import ThemeProvider, { useTheme } from './src/context/ThemeContext';
+import AuthProvider from './src/context/AuthContext';
 
-export default function App() {
+function AppContent() {
+  const { theme } = useTheme();
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hello Smart City</Text>
-      <Text style={styles.subtitle}>Android Emulator is working ✅</Text>
-    </View>
+    <>
+      <StatusBar
+        barStyle={theme.statusBar}
+        backgroundColor={theme.background}
+      />
+      <AppNavigator />
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0B1220',
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
-  subtitle: {
-    marginTop: 10,
-    fontSize: 16,
-    color: '#CBD5E1',
-  },
-});
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <AppContent />
+          </AuthProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
+  );
+}
